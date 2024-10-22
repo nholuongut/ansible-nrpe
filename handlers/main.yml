@@ -1,0 +1,29 @@
+---
+# handlers for nrpe
+
+- name: enable and start nrpe
+  ansible.builtin.service:
+    name: "{{ nrpe_service }}"
+    state: started
+    enabled: true
+
+- name: disable and stop nrpe
+  ansible.builtin.service:
+    name: "{{ nrpe_service }}"
+    state: stopped
+    enabled: false
+
+- name: restart nrpe
+  ansible.builtin.service:
+    name: "{{ nrpe_service }}"
+    state: restarted
+  when: nrpe_enable|bool
+
+- name: reload nrpe
+  ansible.builtin.service:
+    name: "{{ nrpe_service }}"
+    state: reloaded
+  when: nrpe_enable|bool
+
+# EOF
+...
